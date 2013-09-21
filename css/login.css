@@ -1,0 +1,18 @@
+body {
+  margin: 0; /* pour éviter les marges */
+  text-align: center; /* pour corriger le bug de centrage IE */
+}
+
+#global {
+	position:absolute;
+	top: 50%;
+	left: 50%;
+	width:27em;
+	height:10em;
+	margin-top: -9em; /*set to a negative number 1/2 of your height*/
+	margin-left: -15em; /*set to a negative number 1/2 of your width*/
+	border: 1px solid #ccc;
+	background-color: #f3f3f3;
+
+}
+
