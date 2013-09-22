@@ -40,7 +40,8 @@
     $query = "SELECT * FROM lieux WHERE interne = 0 AND LID > 0 ORDER BY nom_lieu";
     $liste_lieux = mysql_query($query, $ma_base);
 ?>
-<div id="statut"><br><br></div>
+<div id="statut"></div>
+<br><br>
 <div class='corps'>
     <!--Affichage tableau-->
 	<table border=1 width=700px cellpadding=0 cellspacing=0>

@@ -5,14 +5,14 @@ require('./fpdf/fpdf.php');
 
 class PDF extends FPDF
 {
-var $titre_page='Lycée Louis ARMAND';
+var $titre_page='Lycée MERMOZ';
 var $widths;
 var $aligns;	
 //En-tête
 function Header() // methode appelée à la création de chaque page
 {
     //Logo
-    $this->Image('logo_lla.png',10,8,25);
+    $this->Image('logo.png',10,8,25);
     //Police Arial gras 15
     $this->SetFont('Arial','B',15);
     //Décalage à droite

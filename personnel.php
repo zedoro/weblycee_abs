@@ -51,12 +51,12 @@ if(ISSET($_GET['action']))
     }
     if ($_GET['action'] == 2)
     {
-        $query = "UPDATE personnel SET nom='".mysql_real_escape_string($_GET['nom'])."', prenom='".mysql_real_escape_string($_GET['prenom']). "', poste='".mysql_real_escape_string($_GET['poste']). "', discipline='".mysql_real_escape_string($_GET['discipline']). "' WHERE PRID=".$_GET['id'];
+        $query = "UPDATE personnel SET civilite='".mysql_real_escape_string($_GET['civi'])."', nom='".mysql_real_escape_string($_GET['nom'])."', prenom='".mysql_real_escape_string($_GET['prenom']). "', poste='".mysql_real_escape_string($_GET['poste']). "', discipline='".mysql_real_escape_string($_GET['discipline']). "' WHERE PRID=".$_GET['id'];
         mysql_query($query, $ma_base);
     }
     if ($_GET['action'] == 3)
     {
-        $query = "INSERT INTO personnel(PRID,civilite,nom,prenom,poste,discipline) VALUES('','".$_GET['civilite']."','".mysql_real_escape_string($_GET['nom'])."','".mysql_real_escape_string($_GET['prenom'])."','".mysql_real_escape_string($_GET['poste'])."','".mysql_real_escape_string($_GET['discipline'])."')";
+        $query = "INSERT INTO personnel(PRID,civilite,nom,prenom,poste,discipline) VALUES('','".mysql_real_escape_string($_GET['civi'])."','".mysql_real_escape_string($_GET['nom'])."','".mysql_real_escape_string($_GET['prenom'])."','".mysql_real_escape_string($_GET['poste'])."','".mysql_real_escape_string($_GET['discipline'])."')";
         mysql_query($query, $ma_base);
     }
 }
@@ -64,7 +64,7 @@ if(ISSET($_GET['action']))
 $query = "SELECT * FROM personnel ORDER BY nom,prenom";
 $liste_profs=mysql_query($query,$ma_base);
 ?>
-
+<div id="statut"></div>
 </br>
 </br>
         <table border=1 width=980px cellpadding=0 cellspacing=0>
@@ -96,7 +96,7 @@ for($j=0;$j<mysql_num_rows($liste_profs);$j++) // enumere les absences
 
 ?>
     <input border=0 src="ico/supp.gif" type=image onClick="javascript:window.location='personnel.php?action=1&id=<?php echo $PrID ?>';" align="middle" > 
-    <input border=0 src="ico/edit.gif" type=image onClick="javascript:edit_personnel('text','<?php echo addslashes($nom) ?>','<?php echo addslashes($prenom) ?>', '<?php echo addslashes($poste) ?>', '<?php echo addslashes($discipline) ?>','<?php echo $j?>', <?php echo $PrID ?>);" align="middle" > 
+    <input border=0 src="ico/edit.gif" type=image onClick="javascript:edit_personnel('text','<?php echo addslashes($civilite) ?>','<?php echo addslashes($nom) ?>','<?php echo addslashes($prenom) ?>', '<?php echo addslashes($poste) ?>', '<?php echo addslashes($discipline) ?>','<?php echo $j?>', <?php echo $PrID ?>);" align="middle" > 
     <input border=0 src="ico/view.gif" type=image onClick="javascript:window.location='voir_personnel.php?id=<?php echo $PrID?>'" align="middle"> 
     </td>
 <?php

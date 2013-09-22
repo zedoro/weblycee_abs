@@ -16,7 +16,7 @@ $prID = $_GET['prID']; // récupère l'ID du prof
 $categorie = $_GET['categorie']; // récupère la categorie d'absence
 $printstatus = $_GET['printstatus']; // récupère la categorie d'absence
 
-// prend toutes les absences de mêmes catégorie non imprimées ou seulement l'absences selctionnée si elle est déja imprimée
+// prend toutes les absences de mêmes catégorie non imprimées ou seulement l'absences selectionnée si elle est déja imprimée
 $ma_base = connect_db();
 $query = "SELECT * FROM personnel,absences,lieux WHERE absences.LID = lieux.LID AND personnel.PRID = absences.PRID AND absences.PRID=".$prID." AND absences.categorie='".$categorie."' ";
 $query .= " AND absences.preset = 0 ";
@@ -31,7 +31,7 @@ $abs=mysql_query($query,$ma_base); //Liste des absences à imprimer pour ce profs
 $querytxt =  "SELECT * FROM textes WHERE categorie = '".$categorie."'";
 $textes = mysql_query($querytxt,$ma_base);
 // passage de utf8 à iso pour les classes fpdf
-$titre_page = utf8_decode(mysql_result($textes,0,"titre"));
+$titre_page = "\n".utf8_decode(mysql_result($textes,0,"titre"));
 $intro = utf8_decode(mysql_result($textes,0,"intro_multi"));
 $bas_intro = utf8_decode(mysql_result($textes,0,"bas_intro_multi"));
 

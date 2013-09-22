@@ -287,8 +287,8 @@ $CompteTotalAbs = mysql_num_rows($liste_abs);
 	</select>
     </td>
 	<td>
-	<a href="absences_new.php">Ajouter une nouvelle absence</a><br>
-	<a href="abs_pdf.php" target="_blank">Visualiser la liste courante des absences</a><br>
+	<a href="absences_new.php"><img src="ico/bouton_new_abs.png"></a>
+	<a href="abs_scroll" target="_blank">Visualiser la liste courante des absences</a><br>
 	</td>
     </tr>
 	<tr>
