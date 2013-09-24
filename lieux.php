@@ -46,10 +46,10 @@
     <!--Affichage tableau-->
 	<table border=1 width=700px cellpadding=0 cellspacing=0>
         <tr>
-            <th width = 70px>&nbsp;</th>
-            <th width = 310px>Nom</th>
-            <th width = 410px>Adresse</th>
-            <th><input type='button' onClick="javascript:add_lieu()" value='Ajouter un lieu'></th>
+            <th width = "70px">&nbsp;</th>
+            <th width = "310px">Nom</th>
+            <th width = "410px">Adresse</th>
+            <th width = "200px"><input type='button' onClick="javascript:add_lieu()" value='Ajouter un lieu'></th>
         </tr>
         <tr id='addLieu'>
         </tr>

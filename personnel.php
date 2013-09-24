@@ -67,22 +67,21 @@ $liste_profs=mysql_query($query,$ma_base);
 <div id="statut"></div>
 </br>
 </br>
-        <table border=1 width=980px cellpadding=0 cellspacing=0>
-        <tr>
+<table border=1 cellpadding=0 cellspacing=0>
+    <tr>
         <th rowspan="2" width = 75px></th>
-<th colspan="6" class="TDligne2"><?php echo mysql_num_rows($liste_profs); ?> enregistrements</th>
-</tr>
-<tr>
-<th width = 20px BGCOLOR="#99CCFF">civilite</th>
-<th width = 200px BGCOLOR="#99CCFF">Nom</th>
-<th width = 120px BGCOLOR="#99CCFF">prenom</th>
-<th width = 130px BGCOLOR="#99CCFF">Poste</th>
-<th width = 200px BGCOLOR="#99CCFF">Discipline</th>
-<th><input type='button' onClick="javascript:add_personnel()" value='Ajouter une personne'></th>
-</tr>
-<tr id="addPersonnel">
-</tr>
+		<th colspan="6" class="TDligne2"><?php echo mysql_num_rows($liste_profs); ?> enregistrements</th>
+	</tr>
+	<tr>
+		<th width = "70px" BGCOLOR="#99CCFF">civilite</th>
+		<th width = "200px" BGCOLOR="#99CCFF">Nom</th>
+		<th width = "120px" BGCOLOR="#99CCFF">prenom</th>
+		<th width = "130px" BGCOLOR="#99CCFF">Poste</th>
+		<th width = "200px" BGCOLOR="#99CCFF">Discipline</th>
+		<th width = "200px"><input type='button' onClick="javascript:add_personnel()" value='Ajouter une personne'></th>
+	</tr>
 
+	
 <?php //autre lignes du tableau
 for($j=0;$j<mysql_num_rows($liste_profs);$j++) // enumere les absences
 {

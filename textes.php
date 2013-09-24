@@ -36,7 +36,6 @@ if( isset( $_POST['status']))
 		echo "Le texte à été mise a jour ";
 		//$requete = "UPDATE textes SET titre='".MyAddSlashes($_POST['titre'])."', intro='".$_POST['intro']."', bas_intro='".MyAddSlashes($_POST['bas_intro'])."', intro_multi='".MyAddSlashes($_POST['intro_multi'])."', bas_intro_multi='".MyAddSlashes($_POST['bas_intro_multi'])."' WHERE categorie='".$_POST['categorie']."'";
 		$requete = "UPDATE textes SET titre='".MyAddSlashes($_POST['titre'])."', intro_multi='".MyAddSlashes($_POST['intro_multi'])."', bas_intro_multi='".MyAddSlashes($_POST['bas_intro_multi'])."' WHERE categorie='".$_POST['categorie']."'";
-		echo $requete;
 		$update = mysql_query($requete,$ma_base);
 		}
 	// affichage du formulaire d'édition du texte

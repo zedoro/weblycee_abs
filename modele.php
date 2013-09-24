@@ -16,15 +16,13 @@ function Header() // methode appelée à la création de chaque page
     //Police Arial gras 15
     $this->SetFont('Arial','B',15);
     //Décalage à droite
-    $this->Cell(40);
+    $this->SetXY(50,10);
     //Titre
     $this->Cell(130,10,$this->titre_page,1,0,'C');
-    //Saut de ligne
-    $this->Ln();
-    $this->Cell(40);
     //date
     //Police Arial gras 15
-    $this->SetFont('Arial','',10);
+    $this->SetXY(50,18);
+	$this->SetFont('Arial','',7);
     setlocale(LC_TIME, "fr");
     $this->Cell(130,10,'imprimé le '.strftime('%A %d %B %Y à %H:%M'),0,1,'L');
 }
@@ -170,44 +168,50 @@ function NbLines($w,$txt)
 class BORDEREAU extends PDF
 {
 
-function intro_haut($intro)
+function nom($civilite,$nom,$prenom)
 {
-	$this->SetFont('Times','',12);
-	$this->MultiCell('',5,$intro,0,1);
-		
-}
-function intro_bas($intro)
-{
-	$this->SetFont('Times','',12);
-	$this->Cell(200,12,$bas_intro,0,1,'C');
-	
+	// place le nom et prénom aligné à 10 mm de la droite de la page
+	$this->SetX(-110);
+	$this->SetFont('Times','B',14);
+	$this->Cell(100,8,$civilite." ".$nom." ".$prenom,0,1,"R");	
 }
 
-function titre_table_abs($civilite,$nom,$prenom)
+function haut($intro)
+{
+	// place le texte de l'intro
+	$this->SetY(35);
+	$this->SetFont('Times','',12);
+	$this->MultiCell('',5,$intro."\n ",0,1);
+	
+		
+}
+function bas($bas)
 {
 	$this->SetFont('Times','',12);
-	$this->Cell(80,8,"CALENDRIER",0,0,"L");
-	$this->Cell(100,8,$civilite." ".$nom." ".$prenom,0,1,"R");	
+	$this->SetX(-90);
+	$this->MultiCell(80,12,"\n ".$bas,0,'L');
+}
+
+function titre_table($categorie)
+{
 	
 	$this->SetFont('Times','',8);
-	$this->SetWidths(array(20,18,8,20,55,60));
-	$this->SetAligns(array('C','C','C','C','C','C','C'));
+	$this->SetWidths(array(18,8,20,55,60));
+	$this->SetAligns(array('C','C','C','C','C'));
 	$this->CRow(array(
-	"MOTIF",
 	"Jour",
 	"Mois",
 	"Durée",
 	"LIEU",
-	"JUSTIFICATION"));
+	"MOTIF"));
 }
 
-function detail_table_abs($detail,$jour,$mois,$tranche,$lieux,$motif)
+function detail_table($jour,$mois,$tranche,$lieux,$motif)
 {
 	$this->SetFont('Times','',8);
-	$this->SetWidths(array(20,18,8,20,55,60));
-	$this->SetAligns(array('C','C','C','C','C','C','C'));
+	$this->SetWidths(array(18,8,20,55,60));
+	$this->SetAligns(array('C','C','C','C','C'));
 	$this->Row(array(
-	$detail,
 	$jour,
 	$mois,
 	$tranche,
@@ -229,7 +233,7 @@ function date_impression()
 {
 	$this->SetFont('Arial','',10);
     setlocale(LC_TIME, "fr");
-    $this->Cell(190,10,'imprimé le '.strftime('%A %d %B %Y à %H:%M'),0,1,'C');
+    $this->Cell(190,10,'imprimé le '.strftime('%A %d %B %Y à %H:%M'),0,1,'L');
 }
 
 }
