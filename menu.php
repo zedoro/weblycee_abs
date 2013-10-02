@@ -2,8 +2,8 @@
 require_once("./checkauth.php");
     function affiche_menu()
     {
-        $tab_menu_lien = array( "absences", "personnel", "lieux", "textes", "planning","conflits","abs_planning");
-        $tab_menu_texte = array( "Absences", "Personnel", "Lieux", "Textes", "Planning","Conflits","Agenda_beta");
+        $tab_menu_lien = array( "absences", "personnel", "lieux", "textes", "planning","conflits");
+        $tab_menu_texte = array( "Absences", "Personnel", "Lieux", "Textes", "Planning","Conflits");
 		$tab_menu_niveau = array( 3,1,1,1,3,2,3 );
         
         $info = pathinfo($_SERVER['PHP_SELF']);

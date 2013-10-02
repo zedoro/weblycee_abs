@@ -14,14 +14,13 @@ $menu = affiche_menu();
 </head>
 <body>
 <?php
-echo $menu;
-
 include('db_fonction.php');
 $ma_base = connect_db();
 
+echo $menu;
+
 ?>
 <div class='corps'>
-
 <?php
 // ############################ actions sur la page #######################
 if (isset($_GET['action']))

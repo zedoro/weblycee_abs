@@ -1,6 +1,6 @@
 function add_personnel() {
     var add = document.getElementById("addPersonnel");
-    add.innerHTML = "<td></td><td><select id='civilite'><option>M</option><option>Mme</option><option>Mlle</option><select></td><td><input type='text' name='nom' id='nom'></td><td><input type='text' name='prenom' id='prenom'></td><td><input type='text' name='poste' id='poste'></td><td><input type='text' name='discipline' id='discipline'></td><td><input type='button' onclick='javascript:submit_personnel()' value='Ajouter'></td>";
+    add.innerHTML = "<td></td><td><input type='text' size='4' name='civilite' id='civilite'></td><td><input type='text' name='nom' id='nom'></td><td><input type='text' name='prenom' id='prenom'></td><td><input type='text' name='poste' id='poste'></td><td><input type='text' name='discipline' id='discipline'></td><td><input type='button' onclick='javascript:submit_personnel()' value='Ajouter'><input type='button' value='Annuler' onClick=\"javascript:window.location='personnel.php'\";></td>";
 
     addCompletion('discipline','discipline');
 }

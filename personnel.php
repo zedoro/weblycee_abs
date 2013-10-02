@@ -2,7 +2,7 @@
 require_once("./menu.php");
 $menu = affiche_menu();
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -15,13 +15,11 @@ $menu = affiche_menu();
             <link href="absences.css" rel="stylesheet" type="text/css">
         <link href="css/menu.css" type="text/css" rel="stylesheet" />
         </head>
-        <body>
-
+<body>
 <?php
 echo $menu;
 ?>
-        <div class='corps'>
-        </br>
+<div class='corps'>
 
 <?php
 $options = array();
@@ -65,8 +63,7 @@ $query = "SELECT * FROM personnel ORDER BY nom,prenom";
 $liste_profs=mysql_query($query,$ma_base);
 ?>
 <div id="statut"></div>
-</br>
-</br>
+
 <table border=1 cellpadding=0 cellspacing=0>
     <tr>
         <th rowspan="2" width = 75px></th>
@@ -79,6 +76,8 @@ $liste_profs=mysql_query($query,$ma_base);
 		<th width = "130px" BGCOLOR="#99CCFF">Poste</th>
 		<th width = "200px" BGCOLOR="#99CCFF">Discipline</th>
 		<th width = "200px"><input type='button' onClick="javascript:add_personnel()" value='Ajouter une personne'></th>
+	</tr>
+	<tr id="addPersonnel">
 	</tr>
 
 	
