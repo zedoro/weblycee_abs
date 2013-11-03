@@ -10,6 +10,7 @@ if (isset($_SESSION['username']))
 
 <html>
 	<head>
+	<meta content="text/html; charset=utf-8" http-equiv="content-type">
 		<title>authentification gestion des absences</title>
 		<script language="javascript" src="js/md5.js"></script>
 		<script language="javascript">
@@ -24,46 +25,36 @@ if (isset($_SESSION['username']))
 	</head>
 	<body>
 
-		<div> Gestion des absences du personnel du Lycée Jean Mermoz </div>
+		<div> Gestion des absences du personnel du LycÃ©e Jean Mermoz </div>
 
 		<?php
-		// remplacer par une table SQL
-		$users = array(
-		1 => array('userID' => 'mermoz', 'passmd5' => '5f4dcc3b5aa765d61d8327deb882cf99', 'userType' => '1'),
-		2 => array('userID' => 'ceich', 'passmd5' => '29f750e9f5cbbd1adab551521d615c58', 'userType' => '2'),
-		3 => array('userID' => 'jschildknecht1', 'passmd5' => 'fac05328668f599efe18e76cdb284aab', 'userType' => '3'),
-		4 => array('userID' => 'mzougui', 'passmd5' => '7253b86365a59884ea8aecc8661ed683', 'userType' => '2'),
-		5 => array('userID' => 'dkherbouche', 'passmd5' => 'acf1ce7039854e65ae1fa44b7835f24b', 'userType' => '3'),
-		6 => array('userID' => 'jrichmann', 'passmd5' => '9c151641752d221c80ac2c3b9567e621', 'userType' => '3'),
-		7 => array('userID' => 'paymonin', 'passmd5' => '396a55777d4dd2c8f63574645f850083', 'userType' => '1')
-		);
-			
+		include('db_fonction.php');
+		$ma_base = connect_db();
+
 		if (isset($_POST['username']) && isset($_POST['password']))
 			{
 			echo $user = $_POST['username'];
-			echo "<BR>";
-			echo $passmd5 = $_POST['password'];
-			foreach($users as $userInfo)
+			echo "<br>".$passmd5 = $_POST['password'];
+			echo "<br>".$logquery = "SELECT * FROM users WHERE username='".$user."' AND password='".$passmd5."'";
+			$logresult = mysql_query($logquery, $ma_base);
+			if (mysql_num_rows($logresult) == 1)
 				{
-				if ( ($user == $userInfo['userID']) && ($passmd5 == $userInfo['passmd5']))
-					{
-					session_start();
-					$_SESSION['username'] = $userInfo['userID'];
-					$_SESSION['userType'] = $userInfo['userType'];
-					header('Location: absences.php');
-					break;
-					}
-				}		
+				session_start();
+				echo $_SESSION['username'] = mysql_result($logresult,0,"username");
+				echo $_SESSION['usertype'] = mysql_result($logresult,0,"usertype");
+				header('Location: absences.php');
+				break;
+				}
 			echo "<br><br>UTILISATEUR OU MOT DE PASSE INCONNU <br><br>";
 			}
 			
 		if (isset($_POST['logout']))
 			{
-				// On démarre la session
+				// On dÃ©marre la session
 				session_start ();  
-				// On détruit les variables de notre session
+				// On dÃ©truit les variables de notre session
 				session_unset ();  
-				// On détruit notre session
+				// On dÃ©truit notre session
 				session_destroy ();  
 				// On redirige le visiteur vers la page d'accueil
 				header ('location: index.php');  
