@@ -16,7 +16,7 @@
 	// enumere les dates ayant des absences à afficher
 	$nb_ligne =0;
 
-	echo "<tr><td colspan='2' style='line-height: 2; background-color: #00ccff; font-size: 3.5em;  font-weight: bold; text-align: center;'>Prévision des absences de professeurs</td></tr>";
+	echo "<tr><td colspan='2' style='background-color: #00ccff; font-size: 3.5em;  font-weight: bold; text-align: center;'>Prévision des absences de professeurs</td></tr>";
 	echo "<tr bgcolor='#cccccc' border='1' valign='top'><td valign='top' width='50%'><table width ='100%'>";
 	for ($k=1; $k < $nb_jour_affichage; $k++)  // pour chaque jour à afficher
 	{
@@ -40,7 +40,7 @@
 					}
 				$nb_ligne++;
 				//*********************************************** date ***************************
-				echo "<tr style='line-height: 2; text-align: center; background-color: #00ffcc; font-size: 2em;  font-weight: bold;'><td colspan='3'>".$jour."</td></tr>";
+				echo "<tr style='text-align: center; background-color: #00ffcc; font-size: 2em;  font-weight: bold;'><td colspan='3'>".$jour."</td></tr>";
 				//*********************************************** date ***************************
 				
 			}
@@ -73,7 +73,7 @@
 			if ($nb_ligne < 41)
 			{
 			//*************************************************** détails *************************************************
-			echo "<tr style='font-size: 2em; line-height: 1.5;'><td width='20%'>".$horaire."</td>
+			echo "<tr style='font-size: 2em;'><td width='20%'>".$horaire."</td>
 			<td> ".$nom." (".$discipline.")</td></tr>\n";
 			//*************************************************** détails *************************************************
 			}

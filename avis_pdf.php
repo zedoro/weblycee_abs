@@ -1,14 +1,7 @@
 <?php
-require "modele.php";
-require "db_fonction.php";
+require "./modele.php";
+require "./db_fonction.php";
 
-function dateFR($date)
-{
-    $joursem = array("Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam");
-    list($annee, $mois, $jour) = explode('-', $date);
-    $timestamp = mktime (0, 0, 0, $mois, $jour, $annee);
-    return $joursem[date("w",$timestamp)];
-}
 // ###############selection de l'absence  ou des absences de même catégorie #########################################################
 
 $abID = $_GET['abID']; // ID de l'absence passée en GET dans l'URL

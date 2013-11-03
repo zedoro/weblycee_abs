@@ -1,5 +1,6 @@
 <?php
-require ('config.inc.php');
+require_once('./config.inc.php');
+
 ####################################################################################
 # crée une connection persistante avec le serveur Mysql
 ####################################################################################
@@ -160,4 +161,15 @@ function formDate($prefix, $disabled)
                                 ";
 }
 
+########################################################################
+#  date française en format texte                                     
+########################################################################
+
+function dateFR($thedate)
+{
+	$joursem = array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
+	list($annee, $mois, $jour) = explode('-', $thedate);
+	$timestamp = mktime (0, 0, 0, $mois, $jour, $annee);
+	return $joursem[date("w",$timestamp)];
+}
 ?>

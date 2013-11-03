@@ -6,6 +6,7 @@ if (isset($_SESSION['username']))
 	{
     header('Location: absences.php');
 	}
+require ('config.inc.php');
 ?>
 
 <html>
@@ -25,7 +26,7 @@ if (isset($_SESSION['username']))
 	</head>
 	<body>
 
-		<div> Gestion des absences du personnel du Lycée Jean Mermoz </div>
+		<div> Gestion des absences du personnel du <? echo $cste_etab_name; ?> </div>
 
 		<?php
 		include('db_fonction.php');

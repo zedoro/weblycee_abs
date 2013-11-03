@@ -3,7 +3,7 @@ require_once("./menu.php");
 include("./abs_table.inc.php");
 $menu = affiche_menu();
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html">
 <html>
 <head>
   <meta content="text/html; charset=utf-8" http-equiv="content-type">
@@ -287,7 +287,7 @@ $CompteTotalAbs = mysql_num_rows($liste_abs);
     </td>
 	<td>
 	<a href="absences_new.php"><img src="ico/bouton_new_abs.png"></a>
-	<a href="abs_scroll" target="_blank">Visualiser la liste courante des absences</a><br>
+	<a href="abs_pdf" target="_blank"> absences publiées pour les jours à venir</a><br>
 	</td>
     </tr>
 	<tr>

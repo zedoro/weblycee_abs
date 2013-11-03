@@ -29,7 +29,7 @@ Function abs_tableau($liste_abs,$mode)
 		$tab_jours = array("Dim ", "Lun ", "Mar ", "Mer ", "Jeu ", "Ven ", "Sam ");
 		$abID = mysql_result($liste_abs,$j,"abID");
 		$date_saisie = mysql_result($liste_abs,$j,"date_saisie");
-		$date_saisie = date("d/m/Y", strtotime($date_saisie));
+		$date_saisie = date("d/m/Y H:i", strtotime($date_saisie));
 		$date_debut = mysql_result($liste_abs,$j,"date_debut");
 		$date_fin = mysql_result($liste_abs,$j,"date_fin");
 		$date = explode(" ", $date_debut);
@@ -170,7 +170,7 @@ Function mini_tableau($liste_abs,$index)
 	$tab_jours = array("Dim ", "Lun ", "Mar ", "Mer ", "Jeu ", "Ven ", "Sam ");
 	$abID = mysql_result($liste_abs,$j,"abID");
 	$date_saisie = mysql_result($liste_abs,$j,"date_saisie");
-	$date_saisie = date("d/m/Y", strtotime($date_saisie));
+	$date_saisie = date("d/m/Y H:i", strtotime($date_saisie));
 	$date_debut = mysql_result($liste_abs,$j,"date_debut");
 	$date_fin = mysql_result($liste_abs,$j,"date_fin");
 	$date = explode(" ", $date_debut);

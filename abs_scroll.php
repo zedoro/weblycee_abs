@@ -109,14 +109,6 @@ function scroll() {                  // Défilement du DIV
 <?php
 require "db_fonction.php";
 
-function dateFR($date)
-{
-    $joursem = array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
-    list($annee, $mois, $jour) = explode('-', $date);
-    $timestamp = mktime (0, 0, 0, $mois, $jour, $annee);
-    return $joursem[date("w",$timestamp)];
-}
-
 $ma_base = connect_db();
 $date_courante = date("Y-m-d"); //date courante au format mysql
 $date_max = date("Y-m-d",mktime(0,0,0,date("m"),date("d")+$nb_jour_affichage,date("Y")));

@@ -15,9 +15,12 @@
 	
 	// enumere les dates ayant des absences à afficher
 	$nb_ligne =0;
+	$index_color = 0;
+	$colors = array("#008888","#00aaaa","#008888","#00aaaa","#008888","#00aaaa","#008888","#00aaaa","#008888","#00aaaa","#008888","#00aaaa");
+
 
 	echo "<tr><td colspan='2' style='line-height: 2; background-color: #00ccff; font-size: 3.5em;  font-weight: bold; text-align: center;'>Prévision des absences de professeurs</td></tr>";
-	echo "<tr bgcolor='#cccccc' border='1' valign='top'><td valign='top' width='50%'><table width ='100%'>";
+	echo "<tr bgcolor='#ffffff' border='1' valign='top'><td valign='top' width='50%'><table width ='100%' style='border-spacing: 0px;'>";
 	for ($k=1; $k < $nb_jour_affichage; $k++)  // pour chaque jour à afficher
 	{
 		$query = "SELECT date_debut,date_fin,PRID FROM absences WHERE afficher='1' AND TO_DAYS('$date_courante') >= TO_DAYS(date_debut) AND TO_DAYS('$date_courante') <= TO_DAYS(date_fin)";
@@ -36,14 +39,14 @@
 				if ($nb_ligne == 20) $nb_ligne = 21; // evite date orpheline
 				if ($nb_ligne ==21)
 					{
-					echo "</table></td><td valign='top' width='50%'><table width='100%'>";
+					echo "</table></td><td valign='top' width='50%'><table width='100%' style='border-spacing: 0px;'>";
 					}
 				$nb_ligne++;
 				//*********************************************** date ***************************
-				echo "<tr style='line-height: 2; text-align: center; background-color: #00ffcc; font-size: 2em;  font-weight: bold;'><td colspan='3'>".$jour."</td></tr>";
+				echo "<tr style='line-height: 2; text-align: center; background-color: ".$colors[$index_color]."; font-size: 2em;  font-weight: bold;'><td colspan='3'>".$jour."</td></tr>";
 				//*********************************************** date ***************************
-				
 			}
+						
 			// calcul de la durée à afficher
 			$date_d = mysql_result($liste_date,$i,'date_debut');
 			$date_f = mysql_result($liste_date,$i,'date_fin');
@@ -73,7 +76,7 @@
 			if ($nb_ligne < 41)
 			{
 			//*************************************************** détails *************************************************
-			echo "<tr style='font-size: 2em; line-height: 1.5;'><td width='20%'>".$horaire."</td>
+			echo "<tr style='font-size: 2em; line-height: 1.5; background-color: ".$colors[$index_color].";'><td width='20%'>".$horaire."</td>
 			<td> ".$nom." (".$discipline.")</td></tr>\n";
 			//*************************************************** détails *************************************************
 			}
@@ -81,6 +84,7 @@
 		}
 		// passe à la date suivante
 		$date_courante = date('Y-m-d', strtotime("+". $k. " day"));
+		if ($i>0) $index_color++; //change de couleur si au moins une absence affichée
 	}
 	if ($nb_ligne < 20) echo "</table></td><td valign='top' width='50%'><table width='100%'>";
 	echo "</td></tr></table>";

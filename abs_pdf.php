@@ -1,15 +1,7 @@
 <?php
+require "./modele.php";
+require "./db_fonction.php";
 
-function dateFR($date)
-{
-    $joursem = array("Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi");
-    list($annee, $mois, $jour) = explode('-', $date);
-    $timestamp = mktime (0, 0, 0, $mois, $jour, $annee);
-    return $joursem[date("w",$timestamp)];
-}
-
-require "modele_lla.php";
-require "db_fonction.php";
 $ma_base = connect_db();
 $date_courante = date("Y-m-d"); //date courante au format mysql
 setlocale(LC_TIME, "fr");
@@ -19,7 +11,7 @@ $pdf->titre_page = 'PREVISION DES ABSENCES DE PROFESSEURS';
 $pdf->AliasNbPages();
 $pdf->AddPage();
 $pdf->SetFont('Times','',12);
-
+$pdf->SetY(35);
 
 for ($k=1; $k < $nb_jour_affichage; $k++)
 {
@@ -58,7 +50,6 @@ for ($k=1; $k < $nb_jour_affichage; $k++)
             $pdf->SetAligns(array('L','L','L', 'L'));
             $pdf->Row(array($jour,'','',''));
         }
-        //$pdf->Cell(60,10, $date_debut);
         $query = "SELECT * FROM personnel WHERE personnel.PRID = ".mysql_result($liste_date,$i,'PRID');
         $personne=mysql_query($query,$ma_base);
         for($j=0;$j<mysql_num_rows($personne);$j++)
