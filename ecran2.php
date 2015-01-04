@@ -13,6 +13,7 @@
 	$date_max = date("Y-m-d",mktime(0,0,0,date("m"),date("d")+$nb_jour_affichage,date("Y")));
 	setlocale(LC_TIME, "fr"); // passe au système de date français
 	
+	$nb_ligne_max = 16;
 	// enumere les dates ayant des absences à afficher
 	$nb_ligne =0;
 
@@ -27,14 +28,14 @@
 		{
 			// affiche le jour sur la première ligne d'une série d'absences
 			
-			if(($i == 0 || $nb_ligne==21) && $nb_ligne < 40) 
+			if(($i == 0 || $nb_ligne == $nb_ligne_max) && $nb_ligne < ($nb_ligne_max*2+1)) 
 			{
 				list($y,$m,$d) = explode("-",$date_courante);
 				$j = dateFR($date_courante);
 				$jour = $j . " " . $d . "/" . $m . "/" . $y;
 				//*********************************************** saut de colonne ***************************
-				if ($nb_ligne == 20) $nb_ligne = 21; // evite date orpheline
-				if ($nb_ligne ==21)
+				if ($nb_ligne == ($nb_ligne_max-1)) $nb_ligne = $nb_ligne_max; // evite date orpheline
+				if ($nb_ligne == $nb_ligne_max)
 					{
 					echo "</table></td><td valign='top' width='50%'><table width='100%'>";
 					}
@@ -70,11 +71,11 @@
 			$discipline = mysql_result($personne,0,"discipline");
 			
 			$nb_ligne++;
-			if ($nb_ligne < 41)
+			if ($nb_ligne < ($nb_ligne_max*2+1))
 			{
 			//*************************************************** détails *************************************************
-			echo "<tr style='font-size: 2em;'><td width='20%'>".$horaire."</td>
-			<td> ".$nom." (".$discipline.")</td></tr>\n";
+			echo "<tr><td width='25%'  style='font-size: 1.6em;'>".$horaire."</td>
+			<td  style='font-size: 2em;'> ".$nom." (".$discipline.")</td></tr>\n";
 			//*************************************************** détails *************************************************
 			}
 			
@@ -82,7 +83,7 @@
 		// passe à la date suivante
 		$date_courante = date('Y-m-d', strtotime("+". $k. " day"));
 	}
-	if ($nb_ligne < 20) echo "</table></td><td valign='top' width='50%'><table width='100%'>";
+	if ($nb_ligne < $nb_ligne_max) echo "</table></td><td valign='top' width='50%'><table width='100%'>";
 	echo "</td></tr></table>";
 	?>
 	
