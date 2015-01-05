@@ -5,11 +5,11 @@ require('./fpdf/fpdf.php');
 
 class PDF extends FPDF
 {
-var $titre_page='Lycée MERMOZ';
+var $titre_page;
 var $widths;
 var $aligns;	
 //En-tête
-	function Header() // methode appelée à la création de chaque page
+	function Header() // methode appelée par addpage à la création de chaque page
 	{
 		//Logo
 		$this->Image('logo.png',10,8,25);
@@ -28,7 +28,7 @@ var $aligns;
 	}
 
 	//Pied de page
-	function Footer() // methode appelée à la création de chaque page
+	function Footer() // methode appelée par addpage à la création de chaque page
 	{
 		//Positionnement à 1,5 cm du bas
 		$this->SetY(-15);
@@ -222,11 +222,10 @@ class BORDEREAU extends PDF
 	function signature()
 	{
 		$this->SetFont('Times','',11);
-		$this->Rect(65,255,130,25);
-		$this->SetXY(67,255);
-		$this->Write(12,"convocation rétirée le ......./......./.........");
-		$this->SetXY(110,263);
-		$this->Write(12,"Signature:");
+		$this->Rect(65,130,130,15);
+		$this->SetXY(67,130);
+		$this->Write(12,"convocation rétirée le ......./......./..............");
+		$this->Write(12,"      Signature:");
 
 	}
 	function date_impression()

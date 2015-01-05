@@ -13,13 +13,23 @@ $printstatus = $_GET['printstatus']; // récupère la categorie d'absence
 $ma_base = connect_db();
 $query = "SELECT * FROM personnel,absences,lieux WHERE absences.LID = lieux.LID AND personnel.PRID = absences.PRID AND absences.PRID=".$prID." AND absences.categorie='".$categorie."' ";
 $query .= " AND absences.preset = 0 ";
-if($printstatus==0) $query .= "AND absences.print=0"; else $query .="AND absences.ABID =".$abID;
+if($printstatus==0) $query .= "AND absences.print=0"; else $query .="AND absences.ABID =".$abID;  // si avis déja imprimé, ne réimprime que cet avis, sinon imprime tous les avis non imprimé de même catégorie
 // echo $query."<br>"; // DEBUG
 
 $abs=mysql_query($query,$ma_base); //Liste des absences à imprimer pour ce profs
 // echo "<br>lignes:".mysql_num_rows($abs); // DEBUG
 
-// ###################### Selection du des textes du bordereau  ################################################################
+// détermine 48h avant la 1ère convocation
+
+$last = mysql_num_rows($abs);
+for ($i=0;$i<$last;$i++)
+{
+$limite = mysql_result($abs,$i,'date_debut');
+if ($limite >= mysql_result($abs,$i,'date_debut')) $limite = mysql_result($abs,$i,'date_debut');
+}
+
+
+// ###################### Selection des textes du bordereau  ################################################################
 
 $querytxt =  "SELECT * FROM textes WHERE categorie = '".$categorie."'";
 $textes = mysql_query($querytxt,$ma_base);
@@ -30,7 +40,7 @@ $intro = utf8_decode(mysql_result($textes,0,"intro_multi"));
 $bas = utf8_decode(mysql_result($textes,0,"bas_intro_multi"));
 
 
-if ($categorie == "Examen") $bordereau_double = true;
+if ($categorie == "Examen" || $categorie == "Stage") $bordereau_double = true;
 else $bordereau_double = false;
 
 // ####################### composition du bordereau     ########################################################################
@@ -56,20 +66,43 @@ $pdf->nom($civilite,$nom,$prenom);
 
 if ($bordereau_double)
 {
-	$pdf->SetXY(10,170);
-	$pdf->date_impression();
-
+	$pdf->SetFont('Times','B',12);
+	setlocale(LC_TIME, "fr");
+	$pdf->SetXY(40,155); // cadre accusé de réception
+	$pdf->Cell(160,8," Accusé de réception imprimé le ".strftime('%A %d %B %Y à %H:%M'),1,0,'C');
+	
+	$pdf->SetXY(20,165); // cadre nom prénom
+	$pdf->SetFont('Times','B',14);
+	$pdf->Cell(100,8,$civilite." ".$nom." ".$prenom,0,1,"L");
+	
+	list($date_limite, $heure_limite) = explode(" ", $limite);
+	$date_limite = date('Y-m-d',strtotime($date_limite.' - 2 days'));
+	list($annee_limite,$mois_limite,$jour_limite) = explode("-",$date_limite);
+	$date_limite = $jour_limite."/".$mois_limite."/".$annee_limite;
+	
+	$pdf->SetFont('Times','',12);
+	$pdf->SetXY(20,175); // choix 1
+	$pdf->Cell(4,4,"",1,0,'L');
+	$pdf->Write(4,"Je me rend à la convocation, fiche d'absence/remplacement à rendre avant le ");
+	$pdf->SetFont('Times','B',12);
+	$pdf->Write(4,$date_limite);
+	
+	$pdf->SetFont('Times','',12);
+	$pdf->SetXY(20,182); // choix 2
+	$pdf->Cell(4,4,"",1,0,'L');
+	$pdf->Cell(5,5,"Je ne me rend pas à la convocation pour le motif :",0,0,'L');
+	
+	$pdf->SetXY(10,200); // tableau ligne de titre
 	$pdf->titre_table($categorie);
 	$next_abs_bas = $pdf->GetY();
 	
-	$pdf->SetY(170);
-	$pdf->nom($civilite,$nom,$prenom);
+	
 
 }
 
 
 // ------------------------   détails  -----------------------
-$last = mysql_num_rows($abs);
+
 for ($i=0;$i<$last;$i++)
     {
 	// -------- collecte des infos -----------
