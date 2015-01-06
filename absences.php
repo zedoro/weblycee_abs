@@ -387,13 +387,14 @@ $menu = affiche_menu();
 	<th width = "80px" BGCOLOR="#99CCFF">Categorie</th>
 	<th width = "150px" BGCOLOR="#99CCFF">Examen</th>
 	<th width = "100px" BGCOLOR="#99CCFF">Date de saisie</th>
-	<th width = "80px" rowspan='2' BGCOLOR="#99CCFF">Pré-saisie</th>
+	<th width = "80px"  BGCOLOR="#99CCFF">Pré-saisie</th>
 	</tr>
 	<tr>
 	<th class="TDligne2">Details</th>
 	<th class="TDligne2">Ordonateur</th>
 	<th class="TDligne2" colspan='2'>Lieux</th>
 	<th class="TDligne2">modif. par</th>
+	<th class="TDligne2">gest convoc</th>
 	</tr>
 
 
@@ -444,7 +445,8 @@ $menu = affiche_menu();
 		$preset = mysql_result($liste_abs,$j,"preset");
 		$print = mysql_result($liste_abs,$j,"print");
 		$user = mysql_result($liste_abs,$j,"user");
-
+		$gest = mysql_result($liste_abs,$j,"gest");
+		
 		if (mysql_result($liste_abs,$j,"categorie") == "Examen") $TDclass = "class='TDexamen '";
 		elseif (mysql_result($liste_abs,$j,"categorie") == "Stage") $TDclass = "class='TDstage '";
 		elseif (mysql_result($liste_abs,$j,"categorie") == "Maladie") $TDclass = "class='TDmaladie '";
@@ -504,15 +506,17 @@ $menu = affiche_menu();
 		<td id=<?php echo $style ?> class="top_right" align='middle'>
 			<?php echo "$date_saisie"?>
 		</td>
-		<td rowspan='2' align='middle'>
+		<td align='middle'>
 	<?php
 		//***************************************** gestion de l'affichage de l'état d'avancement ***********************************************
+		/*
 		if ($etat == 1)
 			echo '<input border=0 src="ico/1.gif" type=image onClick="javascript:window.location=\'absences.php?action=5&id=<?php echo $abID ?>\';"  > ';
 		if ($etat == 2)
 			echo '<input border=0 src="ico/2.gif" type=image onClick="javascript:window.location=\'absences.php?action=7&id=<?php echo $abID ?>\';"  > ';
 		if ($etat == 3)
 			echo '<input border=0 src="ico/3.gif" type=image onClick="javascript:window.location=\'absences.php?action=9&id=<?php echo $abID ?>\';"  > ';
+		*/
 		//****************************************************************************************************************************************	
 		if($preset == 0)
 			echo '<input border=0 src="ico/check_off.gif" type=image onClick="javascript:window.location=\'absences.php?action=5&abID=' . $abID . '&preset=1\';"  > '."\n";
@@ -543,6 +547,9 @@ $menu = affiche_menu();
 		</td>
 		<td class="bottom_right" align="middle">
 			<?php echo $user?>
+		</td>
+		<td class="bottom_right" align="middle">
+			<?php echo $gest?>
 		</td>
 		
 	</tr>

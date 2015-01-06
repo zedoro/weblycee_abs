@@ -51,19 +51,7 @@ if( isset( $_POST['status']))
 	echo "</textarea>";
 	echo "<input type=\"submit\" value=\"Valider\">";
 
-	/*echo "<H2> Texte d'intro pour absence simple </h2>";
-	echo "<textarea name=\"intro\" cols=\"100\" rows=\"7\">";
-	echo mysql_result($result,0,"intro");
-	echo "</textarea>";
-	echo "<input type=\"submit\" value=\"Valider\">";
-
-	echo "<h2> signature texte intro absence simple </h2>";
-	echo "<textarea name=\"bas_intro\" cols=\"100\" rows=\"2\">";
-	echo mysql_result($result,0,"bas_intro");
-	echo "</textarea>";
-	echo "<input type=\"submit\" value=\"Valider\">";*/
-
-	echo "<h2> Texte d'introduction </h2>";
+	echo "<h2> Texte d'introduction ( taper [gest] pour insérer le lieu de retrait)</h2>";
 	echo "<textarea name=\"intro_multi\" cols=\"100\" rows=\"7\">";
 	echo mysql_result($result,0,"intro_multi");
 	echo "</textarea>";

@@ -57,6 +57,24 @@ function option_liste_categorie($selected_categorie)
 		echo $tabl_categorie[$i]."</option>\n";
 	}
 }
+
+####################################################################################
+#   renvoie la liste des gestionnaires comme option d'un champ de formulaire          
+#   si $selected_categorie est donné, l'élément correspondant est selectionné
+####################################################################################
+
+function option_liste_gest($selected_gest)
+{
+	$ma_base = connect_db();
+    $liste_gest = mysql_query("SELECT username FROM users ORDER BY username",$ma_base);
+    for($i=0;$i<mysql_num_rows($liste_gest);$i++)
+    {
+        echo "<option value=".mysql_result($liste_gest,$i,"username");
+        if (isset($selected_gest) && mysql_result($liste_gest,$i,"username")==$selected_gest)
+            echo " selected";
+        echo ">"." ". mysql_result($liste_gest,$i,"username")."</option>\n";
+    }
+}
 ####################################################################################
 #   renvoie la liste des tranches horaires comme option d'un champ de formulaire   
 #   si $selected_categorie est donné, l'élément correspondant est selectionné

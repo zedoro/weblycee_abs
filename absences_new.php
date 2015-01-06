@@ -555,6 +555,11 @@ else if ($_GET['action'] == 4)
 		<fieldset id="fs_pré-saisie"><legend>pré-saisie en attente de la convocation officielle</legend>
 			<input type="checkbox" id="pre-saisie" name="pre-saisie" value="true">
 		</fieldset>
+		<fieldset id="fs_gest"><legend>gestionnaire de la convocatio / lieu de retrait</legend>
+			<select id="gest" onchange='adaptForm()' name="gest">
+					<?php option_liste_gest();?>
+			</select>
+		</fieldset>
 		</td></tr>
 		<tr><td valign="bottom" align="right">
 		<?php
@@ -610,6 +615,8 @@ else if ($_GET['action'] == 4)
 			setValue('details', '<?php echo htmlentities($details, ENT_QUOTES, "UTF-8") ?>');
             // pré saisie
 			document.getElementById('pre-saisie').checked = <?php echo $presaisie == 1 ? "true" : "false" ?>;
+			// gestionnaire
+			setSelected('gest', '<?php echo $gest ?>');
 		}
 		function adaptForm ()  {
 			mem_lieux = document.getElementById("lieux").value;

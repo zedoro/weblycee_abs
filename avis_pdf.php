@@ -28,6 +28,11 @@ $limite = mysql_result($abs,$i,'date_debut');
 if ($limite >= mysql_result($abs,$i,'date_debut')) $limite = mysql_result($abs,$i,'date_debut');
 }
 
+// détermine le gestionnaire de la première convocation et le lieu de retrait
+
+$query_gest = "SELECT usertxt FROM users WHERE username = '".mysql_result($abs,0,'gest')."'";
+$result_gest = mysql_query($query_gest,$ma_base);
+$usertxt = mysql_result($result_gest,0,'usertxt');
 
 // ###################### Selection des textes du bordereau  ################################################################
 
@@ -36,7 +41,11 @@ $textes = mysql_query($querytxt,$ma_base);
 
 // passage de utf8 à iso pour les classes fpdf
 $titre_page = utf8_decode(mysql_result($textes,0,"titre"));
+
 $intro = utf8_decode(mysql_result($textes,0,"intro_multi"));
+$usertxt = utf8_decode($usertxt);
+$intro = str_replace( '[gest]',$usertxt,$intro);
+
 $bas = utf8_decode(mysql_result($textes,0,"bas_intro_multi"));
 
 
