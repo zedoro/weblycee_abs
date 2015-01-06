@@ -105,7 +105,8 @@ if(!isset($_GET['action']))
 	//pré saisie
 	if ($_SESSION['userType']==1) $presaisie = 0;
 	if ($_SESSION['userType']==2) $presaisie = 1;
-	$action=1; // pour inserer au prochain appel		
+	$action=1; // pour inserer au prochain appel
+	$gest = $_SESSION['username'];
 }
 //###################################################################################
 // appel de la page $_GET['action'] = 1-->INSERT 2-->UPDATE 3-->EDIT 5-->GESTION CONFLIT
@@ -166,6 +167,11 @@ else if ($_GET['action'] == 1 || $_GET['action'] == 2 || $_GET['action'] == 3 ||
 		$details = $_GET['details'];
 	//pré saisie
 	if (isset($_GET['pre-saisie'])) $presaisie = 1;	else $presaisie = 0;
+	// gestionnaire de la convocation
+	if (!isset($_GET['gest']))
+		$gest = $_SESSION['username'];
+	else
+		$gest = $_GET['gest'];
 	
 	//###################################################################################
 	if($_GET['action'] == 1) // INSERT
@@ -183,7 +189,8 @@ else if ($_GET['action'] == 1 || $_GET['action'] == 2 || $_GET['action'] == 3 ||
 			LID,
 			user,
 			afficher,
-			preset) 
+			preset,
+			gest) 
 			VALUES('".$date_saisie."',"
 			."'',"
 			.$_GET['nom'].",'"
@@ -194,7 +201,8 @@ else if ($_GET['action'] == 1 || $_GET['action'] == 2 || $_GET['action'] == 3 ||
 			.mysql_real_escape_string($details)."','"
 			.mysql_real_escape_string($ordonateur)."','"
 			.$lid."','".$_SESSION['username']."','0',"
-			.$presaisie.")";
+			.$presaisie
+			.",'".$gest."')";
 			//echo "<BR>".$query;        //DEBUG
 			mysql_query($query, $ma_base) or die();
 			$abid = mysql_insert_id(); // récupère l'ABID de la dernière insertion
@@ -220,7 +228,8 @@ else if ($_GET['action'] == 1 || $_GET['action'] == 2 || $_GET['action'] == 3 ||
 			print=0,
 			LID=".$lid.",
 			preset=".$presaisie.",
-			user='".$_SESSION['username']."' WHERE ABID=".$_GET['abid'];
+			user='".$_SESSION['username']."',
+			gest='".$gest."' WHERE ABID=".$_GET['abid'];
 			//echo "<BR>".$query;        //DEBUG
 			mysql_query($query, $ma_base) or die();
 			$abid = $_GET['abid'];
@@ -255,6 +264,9 @@ else if ($_GET['action'] == 1 || $_GET['action'] == 2 || $_GET['action'] == 3 ||
 		$details = mysql_result($abs_data,0,'details');
 		//pré saisie 
 		if (mysql_result($abs_data,0,'preset') == 1) $presaisie = 1; else $presaisie = 0;
+		// gestionnaire de la convocation
+		$gest = mysql_result($abs_data,0,'gest');
+		
 		$action=2;
 		$abid = $_GET['abid'];
 		echo "<input type=\"hidden\" name=\"abid\" value=". $abid.">";
@@ -416,7 +428,10 @@ else if ($_GET['action'] == 4)
 	$details = mysql_result($abs_data,0,'details');
 	//pré saisie 
 	if (mysql_result($abs_data,0,'preset') == 1) $presaisie = 1; else $presaisie = 0;
-    $action=1;
+	// gestionnaire de la convocation
+	$gest = mysql_result($abs_data,0,'gest');
+    
+	$action=1;
     $abid = $_GET['abid'];
 	echo "<input type=\"hidden\" name=\"abid\" value=". $abid.">";
 }

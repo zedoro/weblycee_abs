@@ -12,7 +12,13 @@ global $mysql_serv_passwd;
 global $mysql_serv_DB;
 
 $lien = mysql_pconnect ($mysql_serv_IP,$mysql_serv_UID,$mysql_serv_passwd);
-mysql_select_db($mysql_serv_DB,$lien);
+if (!$lien) {
+    die('Connexion impossible : ' . mysql_error());
+}
+$db_selected = mysql_select_db($mysql_serv_DB,$lien);
+if (!$db_selected) {
+   die ('Impossible de sélectionner la base de données : ' . mysql_error());
+}
 mysql_query("SET CHARACTER SET 'utf8'", $lien);
 return ($lien);
 }

@@ -222,8 +222,8 @@ class BORDEREAU extends PDF
 	function signature()
 	{
 		$this->SetFont('Times','',11);
-		$this->Rect(65,130,130,15);
-		$this->SetXY(67,130);
+		$this->Rect(65,260,130,15);
+		$this->SetXY(67,260);
 		$this->Write(12,"convocation rétirée le ......./......./..............");
 		$this->Write(12,"      Signature:");
 

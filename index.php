@@ -30,19 +30,22 @@ require ('config.inc.php');
 
 		<?php
 		include('db_fonction.php');
-		$ma_base = connect_db();
+		if (!$ma_base = connect_db()) echo "erreur de connexion à la base de donnée";
 
 		if (isset($_POST['username']) && isset($_POST['password']))
 			{
-			echo $user = $_POST['username'];
-			echo "<br>".$passmd5 = $_POST['password'];
-			echo "<br>".$logquery = "SELECT * FROM users WHERE username='".$user."' AND password='".$passmd5."'";
+			$user = $_POST['username'];
+			$passmd5 = $_POST['password'];
+			$logquery = "SELECT * FROM users WHERE username='".$user."' AND password='".$passmd5."'";
 			$logresult = mysql_query($logquery, $ma_base);
+			if (!$logresult) {
+				die('Requête invalide : ' . mysql_error());
+			}
 			if (mysql_num_rows($logresult) == 1)
 				{
 				session_start();
 				echo $_SESSION['username'] = mysql_result($logresult,0,"username");
-				echo $_SESSION['usertype'] = mysql_result($logresult,0,"usertype");
+				echo $_SESSION['userType'] = mysql_result($logresult,0,"usertype");
 				header('Location: absences.php');
 				break;
 				}

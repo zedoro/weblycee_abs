@@ -49,12 +49,12 @@ if(ISSET($_GET['action'])) // si appel avec action demandée
     if ($_GET['action'] == 2) // demande de mise à jour
     {
         	
-		$query = "UPDATE users SET password='".mysql_real_escape_string($_GET['password'])."', usertype='".mysql_real_escape_string($_GET['usertype'])."' WHERE username='".mysql_real_escape_string($_GET['username'])."'";
+		$query = "UPDATE users SET password='".mysql_real_escape_string($_GET['password'])."', usertype='".mysql_real_escape_string($_GET['usertype'])."', usertxt='".mysql_real_escape_string($_GET['txt'])."' WHERE username='".mysql_real_escape_string($_GET['username'])."'";
 		mysql_query($query, $ma_base);
     }
     if ($_GET['action'] == 3) // demande d'ajout
     {
-        $query = "INSERT INTO users(username,password,usertype) VALUES('".mysql_real_escape_string($_GET['username'])."','".mysql_real_escape_string($_GET['password'])."','".mysql_real_escape_string($_GET['usertype'])."')";
+        $query = "INSERT INTO users(username,password,usertype,usertxt) VALUES('".mysql_real_escape_string($_GET['username'])."','".mysql_real_escape_string($_GET['password'])."','".mysql_real_escape_string($_GET['usertype'])."','".mysql_real_escape_string($_GET['usertxt'])."')";
         echo $query;
 		mysql_query($query, $ma_base);
     }
@@ -71,12 +71,13 @@ $user_list=mysql_query($query,$ma_base);
 <table border=1 cellpadding=0 cellspacing=0>
     <tr>
         <th rowspan="2" width = 75px></th>
-		<th colspan="6" class="TDligne2"><?php echo mysql_num_rows($user_list); ?> utilisateur(s)</th>
+		<th colspan="7" class="TDligne2"><?php echo mysql_num_rows($user_list); ?> utilisateur(s)</th>
 	</tr>
 	<tr>
 		<th width = "200px" BGCOLOR="#99CCFF">identifiant</th>
 		<th width = "120px" BGCOLOR="#99CCFF">mot de passe</th>
 		<th width = "130px" BGCOLOR="#99CCFF">niveau d'utilisation</th>
+		<th width = "200px" BGCOLOR="#99CCFF">texte pour le retrait des bordereaux</th>
 		<th width = "200px"><input type='button' onClick="javascript:add_user()" value='Ajouter un utilisateur'></th>
 	</tr>
 	<tr id="adduser">
@@ -89,6 +90,7 @@ for($j=0;$j<mysql_num_rows($user_list);$j++) // enumere les utilisateurs
     $username = mysql_result($user_list,$j,"username");
     $password = mysql_result($user_list,$j,"password");
     $usertype = mysql_result($user_list,$j,"usertype");
+	$usertxt = mysql_result($user_list,$j,"usertxt");
 ?>
 	<tr>
 	<td align='middle'>
@@ -100,13 +102,16 @@ for($j=0;$j<mysql_num_rows($user_list);$j++) // enumere les utilisateurs
     echo "<td bgcolor=$bgColor align='middle' id='username$j'>$username</td>";
 	
     echo "<td bgcolor=$bgColor align='middle' id='password$j'>";
-	echo "<img src='ico/edit.gif' onClick=\"javascript:edit_user_password('".addslashes($username)."','".addslashes($password)."','".addslashes($usertype)."',$j)\">"; 
+	echo "<img src='ico/edit.gif' onClick=\"javascript:edit_user_password('".addslashes($username)."','".addslashes($password)."','".addslashes($usertype)."','".addslashes($usertxt)."',$j)\">"; 
 	echo "</td>";
 		
     echo "<td bgcolor=$bgColor align='middle' id='usertype$j'>";
-	echo "<img src='ico/edit.gif' onClick=\"javascript:edit_user_level('".addslashes($username)."','".addslashes($password)."','".addslashes($usertype)."',$j)\">"; 
+	echo "<img src='ico/edit.gif' onClick=\"javascript:edit_user_level('".addslashes($username)."','".addslashes($password)."','".addslashes($usertype)."','".addslashes($usertxt)."',$j)\">"; 
 	echo "&nbsp $usertype";
 	echo "</td>";
+	echo "<td bgcolor=$bgColor align='middle' id='usertxt$j'>";
+	echo "<img src='ico/edit.gif' onClick=\"javascript:edit_user_txt('".addslashes($username)."','".addslashes($password)."','".addslashes($usertype)."','".addslashes($usertxt)."',$j)\">"; 
+	echo " $usertxt</td>";
 	
 ?>
 	<td id="save<?php echo $j?>"></td>

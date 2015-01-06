@@ -460,9 +460,9 @@ $menu = affiche_menu();
 	<tr>
 		<td>
 		<!-- icones cliquables -->
-		<img border=0 src="ico/edit.gif" type=image <? if ($_SESSION['userType'] < 3) echo "onClick=\"javascript:window.location='absences_new.php?action=3&abid=".$abID."';\"\n";?>> 
-		<img border=0 src="ico/supp.gif" type=image <? if ($_SESSION['userType'] < 3) echo "onClick=\"javascript:window.location='absences.php?action=1&abid=".$abID."';\"\n";?>> 
-		<img border=0 src="ico/copy.gif" type=image <? if ($_SESSION['userType'] < 3) echo "onClick=\"javascript:window.location='absences_new.php?action=4&abid=".$abID."';\"\n";?>> 
+		<img border=0 src="ico/edit.gif" type="image" <?php if ($_SESSION['userType'] < 3) echo "onClick=\"javascript:window.location='absences_new.php?action=3&abid=".$abID."';\"\n";?>> 
+		<img border=0 src="ico/supp.gif" type="image" <?php if ($_SESSION['userType'] < 3) echo "onClick=\"javascript:window.location='absences.php?action=1&abid=".$abID."';\"\n";?>> 
+		<img border=0 src="ico/copy.gif" type="image" <?php if ($_SESSION['userType'] < 3) echo "onClick=\"javascript:window.location='absences_new.php?action=4&abid=".$abID."';\"\n";?>> 
 		<?php
 		if($print == 0) $pdf_ico="ico/pdf.gif"; else $pdf_ico="ico/pdf_fait.gif";
 		if($print == 0) $pdf_act=1; else $pdf_act=0;

@@ -69,7 +69,7 @@ if ($bordereau_double)
 	$pdf->SetFont('Times','B',12);
 	setlocale(LC_TIME, "fr");
 	$pdf->SetXY(40,155); // cadre accusé de réception
-	$pdf->Cell(160,8," Accusé de réception imprimé le ".strftime('%A %d %B %Y à %H:%M'),1,0,'C');
+	$pdf->Cell(160,8," ACCUSE DE RECEPTION imprimé le ".strftime('%A %d %B %Y à %H:%M'),1,0,'C');
 	
 	$pdf->SetXY(20,165); // cadre nom prénom
 	$pdf->SetFont('Times','B',14);
@@ -83,14 +83,14 @@ if ($bordereau_double)
 	$pdf->SetFont('Times','',12);
 	$pdf->SetXY(20,175); // choix 1
 	$pdf->Cell(4,4,"",1,0,'L');
-	$pdf->Write(4,"Je me rend à la convocation, fiche d'absence/remplacement à rendre avant le ");
+	$pdf->Write(4,"Je me rends à la convocation, fiche d'absence/remplacement à rendre avant le ");
 	$pdf->SetFont('Times','B',12);
 	$pdf->Write(4,$date_limite);
 	
 	$pdf->SetFont('Times','',12);
 	$pdf->SetXY(20,182); // choix 2
 	$pdf->Cell(4,4,"",1,0,'L');
-	$pdf->Cell(5,5,"Je ne me rend pas à la convocation pour le motif :",0,0,'L');
+	$pdf->Cell(5,5,"Je ne me rends pas à la convocation pour le motif :",0,0,'L');
 	
 	$pdf->SetXY(10,200); // tableau ligne de titre
 	$pdf->titre_table($categorie);
