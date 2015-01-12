@@ -22,10 +22,14 @@ $abs=mysql_query($query,$ma_base); //Liste des absences à imprimer pour ce profs
 // détermine 48h avant la 1ère convocation
 
 $last = mysql_num_rows($abs);
+$unix_time_limite = strtotime(mysql_result($abs,$i,'date_debut'));
 for ($i=0;$i<$last;$i++)
 {
-$limite = mysql_result($abs,$i,'date_debut');
-if ($limite >= mysql_result($abs,$i,'date_debut')) $limite = mysql_result($abs,$i,'date_debut');
+if ($unix_time_limite >= strtotime(mysql_result($abs,$i,'date_debut')))
+	{
+	$unix_time_limite = strtotime(mysql_result($abs,$i,'date_debut'));
+	$limite = mysql_result($abs,$i,'date_debut');
+	}
 }
 
 // détermine le gestionnaire de la première convocation et le lieu de retrait

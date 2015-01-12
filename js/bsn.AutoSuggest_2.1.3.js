@@ -21,15 +21,6 @@ else
 
 
 
-
-
-
-
-
-
-
-
-
 _b.AutoSuggest = function (id, param)
 {
 	// no DOM - give up!

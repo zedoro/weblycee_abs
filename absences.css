@@ -122,7 +122,8 @@ th{
     border-top: none;
 }
 
-#f_examen{
+// css pour les détails de la saisie d'absence
+#exam_nom{
     background-color: #F0FFFF;
 }
 #lieux{
@@ -134,6 +135,9 @@ th{
 #details{
     background-color: #F0F0FF;
 }
+ label {
+   display : block;
+   }
 
 fieldset{
 	border: 1px solid black;
