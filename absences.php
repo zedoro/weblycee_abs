@@ -151,7 +151,7 @@ $menu = affiche_menu();
 		if (isset($_SESSION['presaisie'])) 	{
 			$presaisie = $_SESSION['presaisie'];
 		}
-		else if ($_SESSION['userType']==1) $presaisie = 'sans';
+		else if ($_SESSION['userType']==1) $presaisie = 'tout';
 		else if ($_SESSION['userType']==2) $presaisie = 'seulement';
 		else if ($_SESSION['userType']==3) $presaisie = 'tout';
 		else $presaisie = 'tout';
@@ -204,7 +204,7 @@ $menu = affiche_menu();
 		if ($sel_tri=='datec')
 			$critere .= " absences.date_debut DESC,personnel.nom,personnel.prenom";
 		if ($sel_tri=='nom')
-			$critere .= " personnel.nom,personnel.prenom,absences.date_debut";
+			$critere .= " personnel.nom,personnel.prenom,absences.date_debut DESC";
 		if ($sel_tri=='discipline')
 			$critere .= " personnel.discipline,personnel.nom,personnel.prenom,absences.date_debut";
 		if ($sel_tri=='date_saisie')
